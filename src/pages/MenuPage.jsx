@@ -63,7 +63,7 @@ const MenuPage = () => {
 
                         <div className="menu-option">
                             <div className="option-icon">💌</div>
-                            <h3 className="option-title">Gửi lời chúc</h3>
+                            <h3 className="option-title">Không thể tham dự</h3>
                             <p className="option-description">
                                 Viết những lời chúc tốt đẹp cho Thảo Mie
                             </p>

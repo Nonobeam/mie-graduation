@@ -64,7 +64,7 @@ const WelcomePage = () => {
 
                 <form onSubmit={handleSubmit} className="welcome-form">
                     <Input
-                        label="Tên của bạn"
+                        label="Bạn tên là gì thế"
                         value={name}
                         onChange={(e) => {
                             setName(e.target.value);
