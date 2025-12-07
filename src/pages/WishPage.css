@@ -1,0 +1,175 @@
+.wish-page {
+    background: linear-gradient(135deg, var(--color-background) 0%, var(--color-background-secondary) 100%);
+}
+
+.wish-card {
+    max-width: 600px;
+}
+
+.wish-header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.wish-icon {
+    font-size: 3.5rem;
+    margin-bottom: var(--spacing-md);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.wish-title {
+    font-size: 2rem;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-sm);
+}
+
+.wish-description {
+    font-size: 1.125rem;
+    color: var(--color-text-light);
+    line-height: 1.6;
+}
+
+.wish-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+.wish-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.wish-actions button {
+    flex: 1;
+}
+
+.success-alert {
+    background: linear-gradient(135deg, var(--color-success), #6A8F52);
+    color: var(--color-white);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-weight: 500;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.success-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    font-weight: 700;
+}
+
+/* Wish Display Styles */
+.wish-display {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.wish-display-box {
+    background: var(--color-background);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    position: relative;
+}
+
+.wish-display-box::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-size: 4rem;
+    color: var(--color-primary);
+    line-height: 1;
+}
+
+.wish-display-message {
+    font-size: 1.125rem;
+    color: var(--color-text);
+    line-height: 1.8;
+    font-style: italic;
+    margin-bottom: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.wish-display-time {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    text-align: right;
+    margin: 0;
+}
+
+.wish-success-message {
+    background: linear-gradient(135deg, var(--color-success), #6A8F52);
+    color: var(--color-white);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .wish-icon {
+        font-size: 3rem;
+    }
+
+    .wish-title {
+        font-size: 1.75rem;
+    }
+
+    .wish-description {
+        font-size: 1rem;
+    }
+
+    .wish-actions {
+        flex-direction: column;
+    }
+
+    .wish-actions button {
+        width: 100%;
+    }
+
+    .wish-display-message {
+        font-size: 1rem;
+    }
+}

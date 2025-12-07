@@ -1,0 +1,45 @@
+.floating-hat {
+    position: absolute;
+    z-index: 10;
+    pointer-events: none;
+    animation: floatSlow 4s ease-in-out infinite;
+}
+
+.hat-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(61, 46, 31, 0.15));
+}
+
+/* Floating animation - smooth up and down movement with slight rotation */
+@keyframes floatSlow {
+
+    0%,
+    100% {
+        transform: translateY(0px) rotate(-5deg);
+    }
+
+    50% {
+        transform: translateY(-25px) rotate(5deg);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .floating-hat {
+        animation: floatMobile 3.5s ease-in-out infinite;
+    }
+
+    @keyframes floatMobile {
+
+        0%,
+        100% {
+            transform: translateY(0px) rotate(-3deg);
+        }
+
+        50% {
+            transform: translateY(-15px) rotate(3deg);
+        }
+    }
+}
