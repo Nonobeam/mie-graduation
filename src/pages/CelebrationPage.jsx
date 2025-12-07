@@ -23,6 +23,21 @@ const CelebrationPage = () => {
             return;
         }
 
+        // Submit attendance when entering celebration page
+        const submitAttendanceOnce = async () => {
+            const attendanceSubmitted = localStorage.getItem('mie_grad_attendance_submitted');
+            if (!attendanceSubmitted) {
+                try {
+                    await api.submitAttendance(userName);
+                    localStorage.setItem('mie_grad_attendance_submitted', 'true');
+                } catch (error) {
+                    console.error('Failed to submit attendance:', error);
+                }
+            }
+        };
+
+        submitAttendanceOnce();
+
         // Check if user has already sent a wish
         const wish = storage.getUserWish();
         if (wish) {

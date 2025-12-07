@@ -1,5 +1,5 @@
 /**
- * Google Apps Script for Graduation Wish Collection
+ * Google Apps Script for Graduation Wish and At tendance Collection
  * NOW WITH PROPER CORS HEADERS FOR PRODUCTION
  */
 
@@ -28,34 +28,74 @@ function handleCORS() {
 function handleRequest(e) {
   try {
     const data = JSON.parse(e.postData.contents);
-    const name = data.name;
-    const message = data.message;
+    const type = data.type || 'wish'; // Default to wish for backwards compatibility
     
-    if (!name || !message) {
-      return createResponse(false, 'Missing required fields');
+    if (type === 'attendance') {
+      return handleAttendance(data);
+    } else {
+      return handleWish(data);
     }
-    
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    
-    // Add headers if first run
-    if (sheet.getLastRow() === 0) {
-      sheet.appendRow(['Timestamp', 'Name', 'Wish Message']);
-      sheet.getRange(1, 1, 1, 3).setFontWeight('bold');
-    }
-    
-    const timestamp = new Date(data.timestamp || new Date());
-    sheet.appendRow([
-      Utilities.formatDate(timestamp, Session.getScriptTimeZone(), 'yyyy-MM-dd HH:mm:ss'),
-      name,
-      message
-    ]);
-    
-    return createResponse(true, 'Wish received successfully');
     
   } catch (error) {
     Logger.log('Error: ' + error.toString());
     return createResponse(false, 'Error: ' + error.toString());
   }
+}
+
+function handleAttendance(data) {
+  const name = data.name;
+  
+  if (!name) {
+    return createResponse(false, 'Missing name');
+  }
+  
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName('Attendance');
+  
+  // Create Attendance sheet if it doesn't exist
+  if (!sheet) {
+    sheet = ss.insertSheet('Attendance');
+    sheet.appendRow(['Timestamp', 'Name']);
+    sheet.getRange(1, 1, 1, 2).setFontWeight('bold');
+  }
+  
+  const timestamp = new Date(data.timestamp || new Date());
+  sheet.appendRow([
+    Utilities.formatDate(timestamp, Session.getScriptTimeZone(), 'yyyy-MM-dd HH:mm:ss'),
+    name
+  ]);
+  
+  return createResponse(true, 'Attendance recorded successfully');
+}
+
+function handleWish(data) {
+  const name = data.name;
+  const message = data.message;
+  
+  if (!name || !message) {
+    return createResponse(false, 'Missing required fields');
+  }
+  
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName('Wishes');
+  
+  // Create Wishes sheet if it doesn't exist (or use active sheet)
+  if (!sheet) {
+    sheet = ss.getActiveSheet();
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(['Timestamp', 'Name', 'Wish Message']);
+      sheet.getRange(1, 1, 1, 3).setFontWeight('bold');
+    }
+  }
+  
+  const timestamp = new Date(data.timestamp || new Date());
+  sheet.appendRow([
+    Utilities.formatDate(timestamp, Session.getScriptTimeZone(), 'yyyy-MM-dd HH:mm:ss'),
+    name,
+    message
+  ]);
+  
+  return createResponse(true, 'Wish received successfully');
 }
 
 function createResponse(success, message) {

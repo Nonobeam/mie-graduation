@@ -31,13 +31,39 @@ export const api = {
 
       // Prepare data
       const data = {
-        name: name.trim(),
+        type: 'wish',
+       name: name.trim(),
         message: message.trim(),
         timestamp: new Date().toISOString(),
       };
 
       // Send to Google Apps Script
       const response = await axios.post(GOOGLE_SCRIPT_URL, data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        timeout: 10000, // 10 second timeout
+      });
+
+      if (response.data && response.data.success) {
+        return {
+          success: true,
+          message: 'Lời chúc của bạn đã được gửi thành công!',
+        };
+      } else {
+        throw new Error(response.data?.message || 'Unknown error');
+      }
+    } catch (error) {
+      console.error('Error submitting wish:', error);
+
+      // Handle specific error cases
+      if (error.code === 'ECONNABORTED') {
+        return {
+          success: false,
+          message: 'Kết nối bị timeout. Vui lòng thử lại.',
+        };
+      }
+
       if (error.response) {
         // Server responded with error
         return {
@@ -55,6 +81,50 @@ export const api = {
       }
 
       // Other errors
+      return {
+        success: false,
+        message: 'Có lỗi xảy ra. Vui lòng thử lại sau.',
+      };
+    }
+  },
+
+  /**
+   * Submit attendance to Google Sheets
+   * @param {string} name - User's name
+   * @returns {Promise<{success: boolean, message: string}>}
+   */
+  async submitAttendance(name) {
+    try {
+      if (!name || !name.trim()) {
+        return {
+          success: false,
+          message: 'Vui lòng nhập tên của bạn',
+        };
+      }
+
+      const data = {
+        type: 'attendance',
+        name: name.trim(),
+        timestamp: new Date().toISOString(),
+      };
+
+      const response = await axios.post(GOOGLE_SCRIPT_URL, data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        timeout: 10000,
+      });
+
+      if (response.data && response.data.success) {
+        return {
+          success: true,
+          message: 'Đã xác nhận tham dự!',
+        };
+      } else {
+        throw new Error(response.data?.message || 'Unknown error');
+      }
+    } catch (error) {
+      console.error('Error submitting attendance:', error);
       return {
         success: false,
         message: 'Có lỗi xảy ra. Vui lòng thử lại sau.',
