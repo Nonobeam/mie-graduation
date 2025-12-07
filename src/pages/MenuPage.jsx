@@ -9,12 +9,12 @@ import './MenuPage.css';
 
 const MenuPage = () => {
     const [userName, setUserName] = useState('');
+    const [showJoke, setShowJoke] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
         const name = storage.getUserName();
         if (!name) {
-            // If no name found, redirect to welcome page
             navigate('/');
         } else {
             setUserName(name);
@@ -27,6 +27,11 @@ const MenuPage = () => {
 
     const handleSendWish = () => {
         navigate('/wish');
+    };
+
+    const handleBankTransfer = () => {
+        setShowJoke(true);
+        setTimeout(() => setShowJoke(false), 4000);
     };
 
     return (
@@ -62,14 +67,32 @@ const MenuPage = () => {
                         </div>
 
                         <div className="menu-option">
+                            <div className="option-icon">💰</div>
+                            <h3 className="option-title">Chuyển khoản</h3>
+                            <p className="option-description">
+                                Gửi lời chúc mừng và tham gia buổi lễ tốt nghiệp
+                            </p>
+                            <Button onClick={handleBankTransfer} variant="primary">
+                                Ting ting
+                            </Button>
+                            {showJoke && (
+                                <div className="joke-message-menu">
+                                    <p>😊 Chỉ đùa thôi, sự hiện diện của bạn mới là điều quan trọng nhất!</p>
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="menu-option">
                             <div className="option-icon">💌</div>
-                            <h3 className="option-title">Không thể tham dự</h3>
+                            <h3 className="option-title">Không thể tham dự</h3>
                             <p className="option-description">
                                 Viết những lời chúc tốt đẹp cho Thảo Mie
                             </p>
-                            <Button onClick={handleSendWish} variant="secondary">
-                                Gửi lời chúc
-                            </Button>
+                            <div className="option-buttons">
+                                <Button onClick={handleSendWish} variant="secondary">
+                                    Gửi lời chúc
+                                </Button>
+                            </div>
                         </div>
                     </div>
                 </div>

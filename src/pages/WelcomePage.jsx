@@ -9,7 +9,6 @@ import './WelcomePage.css';
 const WelcomePage = () => {
     const [name, setName] = useState('');
     const [error, setError] = useState('');
-    const [showJoke, setShowJoke] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -31,22 +30,8 @@ const WelcomePage = () => {
         }
     };
 
-    const handleBankTransfer = () => {
-        setShowJoke(true);
-        setTimeout(() => setShowJoke(false), 4000);
-    };
-
     return (
         <div className="page welcome-page">
-            <button className="bank-transfer-btn" onClick={handleBankTransfer}>
-                💰 Chuyển khoản
-            </button>
-
-            {showJoke && (
-                <div className="joke-message">
-                    <p>😊 Chỉ đùa thôi, sự hiện diện của bạn mới là điều quan trọng nhất!</p>
-                </div>
-            )}
             <FloatingHat size={200} position={{ top: '5%', right: '5%' }} />
             <FloatingHat size={120} position={{ bottom: '10%', left: '8%' }} />
 
