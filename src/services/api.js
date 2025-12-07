@@ -38,31 +38,6 @@ export const api = {
 
       // Send to Google Apps Script
       const response = await axios.post(GOOGLE_SCRIPT_URL, data, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        timeout: 10000, // 10 second timeout
-      });
-
-      if (response.data && response.data.success) {
-        return {
-          success: true,
-          message: 'Lời chúc của bạn đã được gửi thành công!',
-        };
-      } else {
-        throw new Error(response.data?.message || 'Unknown error');
-      }
-    } catch (error) {
-      console.error('Error submitting wish:', error);
-
-      // Handle specific error cases
-      if (error.code === 'ECONNABORTED') {
-        return {
-          success: false,
-          message: 'Kết nối bị timeout. Vui lòng thử lại.',
-        };
-      }
-
       if (error.response) {
         // Server responded with error
         return {
