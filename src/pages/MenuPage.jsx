@@ -69,9 +69,6 @@ const MenuPage = () => {
                         <div className="menu-option">
                             <div className="option-icon">💰</div>
                             <h3 className="option-title">Chuyển khoản</h3>
-                            <p className="option-description">
-                                Gửi lời chúc mừng và tham gia buổi lễ tốt nghiệp
-                            </p>
                             <Button onClick={handleBankTransfer} variant="primary">
                                 Ting ting
                             </Button>
