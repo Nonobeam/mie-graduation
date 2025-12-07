@@ -98,16 +98,14 @@
     color: var(--color-text-light);
     font-size: 1rem;
     text-align: center;
+    margin-bottom: var(--spacing-md);
+    line-height: 1.6;
+}
 
-    .menu-page-wrapper {
-        min-height: 100vh;
-    }
-
-    .menu-page {
-        background: linear-gradient(135deg, var(--color-background) 0%, var(--color-background-secondary) 100%);
-    }
-
-    .menu-card {
+/* Responsive */
+@media (max-width: 768px) {
+    .menu-options {
+        grid-template-columns: 1fr;
         max-width: 800px;
         text-align: center;
     }
