@@ -23,7 +23,6 @@ const WishPage = () => {
             return;
         }
 
-        // Check if user has already sent a wish
         const wish = storage.getUserWish();
         if (wish) {
             setHasWish(true);
@@ -36,18 +35,16 @@ const WishPage = () => {
         setError('');
 
         if (!wishMessage.trim()) {
-            setError('Vui lòng nhập lời chúc của bạn');
+            setError(`Vui lòng nhập lời chúc của ${userName}`);
             return;
         }
 
         setLoading(true);
 
         try {
-            // Submit to Google Sheets
             const result = await api.submitWish(userName, wishMessage);
 
             if (result.success) {
-                // Save wish locally
                 storage.saveWish(wishMessage);
                 setSuccess(true);
                 setHasWish(true);
@@ -89,12 +86,12 @@ const WishPage = () => {
                 <div className="wish-header">
                     <div className="wish-icon">💌</div>
                     <h2 className="wish-title">
-                        {hasWish ? 'Lời Chúc Của Bạn' : 'Gửi Lời Chúc'}
+                        {hasWish ? `Lời Chúc Của ${userName}` : 'Gửi Lời Chúc'}
                     </h2>
                     <p className="wish-description">
                         {hasWish
                             ? `Cảm ơn ${userName} đã gửi lời chúc đến Thảo Mie!`
-                            : `${userName}, hãy viết những lời chúc tốt đẹp nhất cho Thảo Mie nhé!`}
+                            : `${userName} có thể cho My xin lời khuyên về công việc, cuộc sống hoặc là cảm nhận về tính cách của My để My hiểu hơn về bản thân mình hoặc bất cứ điều gì ${userName} muốn chia sẻ. Feel free nha, chỉ có hai ta biết thui 😉`}
                     </p>
                 </div>
 
@@ -108,19 +105,19 @@ const WishPage = () => {
                         </div>
                         <div className="wish-success-message">
                             <span className="success-icon">✓</span>
-                            Lời chúc của bạn đã được gửi thành công!
+                            Lời chúc của ${userName} đã được gửi thành công!
                         </div>
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit} className="wish-form">
                         <Input
-                            label="Lời chúc của bạn"
+                            label={`Lời chúc của ${userName}`}
                             value={wishMessage}
                             onChange={(e) => {
                                 setWishMessage(e.target.value);
                                 setError('');
                             }}
-                            placeholder="Viết lời chúc của bạn tại đây..."
+                            placeholder={`Viết lời chúc của ${userName} tại đây...`}
                             multiline
                             rows={6}
                             error={error}

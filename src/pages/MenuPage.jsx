@@ -50,7 +50,7 @@ const MenuPage = () => {
                         </h2>
                         <p className="menu-description">
                             Chúc mừng Thảo Mie đã hoàn thành chặng đường học tập!
-                            Bạn muốn làm gì hôm nay?
+                            {userName} muốn làm gì hôm nay?
                         </p>
                     </div>
 
@@ -74,7 +74,7 @@ const MenuPage = () => {
                             </Button>
                             {showJoke && (
                                 <div className="joke-message-menu">
-                                    <p>😊 Chỉ đùa thôi, sự hiện diện của bạn mới là điều quan trọng nhất!</p>
+                                    <p>😊 Chỉ đùa thôi, sự hiện diện của {userName} mới là điều quan trọng nhất!</p>
                                 </div>
                             )}
                         </div>

@@ -55,7 +55,7 @@ const CelebrationPage = () => {
         setError('');
 
         if (!wishMessage.trim()) {
-            setError('Vui lòng nhập lời chúc của bạn');
+            setError(`Vui lòng nhập lời chúc của ${userName}`);
             return;
         }
 
@@ -115,15 +115,13 @@ const CelebrationPage = () => {
                         Cảm ơn <span className="highlight">{userName}</span> đã tham dự!
                     </h2>
                     <p className="celebration-text">
-                        Xin chúc mừng <strong>Thảo Mie</strong> đã hoàn thành xuất sắc chặng đường học tập!
+                        Nếu ${userName} nhận được link này nghĩa là chúng ta đã cùng nhau trải qua một điều gì đó, dù lớn hay nhỏ thì mình cũng biết ơn, trân trọng trải nghiệm ấy
                     </p>
                     <p className="celebration-text">
-                        Đây là một cột mốc quan trọng, đánh dấu sự khởi đầu cho những hành trình mới
-                        tràn đầy cơ hội và thành công.
+                        Hy vọng sau này chúng ta có thể connect tiếp với nhau trong một khoảnh khắc nào đó nha. Cheers 🥂
                     </p>
                     <p className="celebration-text">
-                        Chúc Thảo Mie luôn vững bước, tự tin và đạt được nhiều thành tựu rực rỡ hơn nữa
-                        trong tương lai! 🌟
+                        Chúc ${userName} thật hạnh phúc và luôn khỏe mạnh nhá 💕
                     </p>
                 </div>
 
@@ -148,7 +146,7 @@ const CelebrationPage = () => {
                             </div>
                             <div className="wish-sent-badge">
                                 <span className="success-icon">✓</span>
-                                Lời chúc của bạn đã được gửi!
+                                Lời chúc của ${userName} đã được gửi!
                             </div>
                         </div>
                     ) : (
@@ -159,7 +157,7 @@ const CelebrationPage = () => {
                                     setWishMessage(e.target.value);
                                     setError('');
                                 }}
-                                placeholder="Viết lời chúc của bạn tại đây..."
+                                placeholder={`Viết lời chúc của ${userName} tại đây...`}
                                 multiline
                                 rows={4}
                                 error={error}

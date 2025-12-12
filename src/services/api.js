@@ -76,14 +76,14 @@ export const api = {
       if (!name || !name.trim()) {
         return {
           success: false,
-          message: 'Vui lòng nhập tên của bạn',
+          message: `Vui lòng nhập tên của ${userName}`,
         };
       }
 
       if (!message || !message.trim()) {
         return {
           success: false,
-          message: 'Vui lòng nhập lời chúc của bạn',
+          message: `Vui lòng nhập lời chúc của ${userName}`,
         };
       }
 
@@ -98,7 +98,7 @@ export const api = {
       
       return {
         success: true,
-        message: 'Lời chúc của bạn đã được gửi thành công!',
+        message: `Lời chúc của ${userName} đã được gửi thành công!`,
       };
     } catch (error) {
       console.error('Error submitting wish:', error);
@@ -117,7 +117,7 @@ export const api = {
       if (!name || !name.trim()) {
         return {
           success: false,
-          message: 'Vui lòng nhập tên của bạn',
+          message: `Vui lòng nhập tên của ${userName}`,
         };
       }
 
