@@ -5,9 +5,16 @@
 
 // Test endpoint - visit the URL to see if deployment works
 function doGet(e) {
-  return ContentService.createTextOutput(
+  const output = ContentService.createTextOutput(
     'Google Apps Script is working! Use POST to submit data.'
   ).setMimeType(ContentService.MimeType.TEXT);
+  
+  // Add CORS headers
+  output.setHeader('Access-Control-Allow-Origin', '*');
+  output.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  output.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  
+  return output;
 }
 
 function doPost(e) {
@@ -18,9 +25,7 @@ function doPost(e) {
     // Safety check
     if (!e) {
       Logger.log('ERROR: Event object is undefined');
-      return ContentService.createTextOutput(
-        JSON.stringify({ success: false, message: 'No event data' })
-      ).setMimeType(ContentService.MimeType.JSON);
+      return createResponse(false, 'No event data');
     }
     
     // Form data comes in e.parameter
@@ -30,9 +35,7 @@ function doPost(e) {
     // Check if we have any data
     if (Object.keys(data).length === 0) {
       Logger.log('WARNING: No parameter data received');
-      return ContentService.createTextOutput(
-        JSON.stringify({ success: false, message: 'No data received' })
-      ).setMimeType(ContentService.MimeType.JSON);
+      return createResponse(false, 'No data received');
     }
     
     const type = data.type || 'wish';
@@ -47,9 +50,7 @@ function doPost(e) {
   } catch (error) {
     Logger.log('ERROR in doPost: ' + error.toString());
     Logger.log('Stack: ' + error.stack);
-    return ContentService.createTextOutput(
-      JSON.stringify({ success: false, message: error.toString() })
-    ).setMimeType(ContentService.MimeType.JSON);
+    return createResponse(false, error.toString());
   }
 }
 
@@ -115,7 +116,14 @@ function handleWish(data) {
 }
 
 function createResponse(success, message) {
-  return ContentService
+  const output = ContentService
     .createTextOutput(JSON.stringify({ success: success, message: message }))
     .setMimeType(ContentService.MimeType.JSON);
+  
+  // Add CORS headers to allow browser to read the response
+  output.setHeader('Access-Control-Allow-Origin', '*');
+  output.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  output.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  
+  return output;
 }
