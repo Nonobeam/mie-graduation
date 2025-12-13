@@ -71,7 +71,7 @@ export const api = {
   /**
    * Submit a wish to Google Sheets
    */
-  async submitWish(name, message) {
+  async submitWish(name, message, isAttending = false) {
     try {
       if (!name || !name.trim()) {
         return {
@@ -92,6 +92,7 @@ export const api = {
         name: name.trim(),
         message: message.trim(),
         timestamp: new Date().toISOString(),
+        isAttending: isAttending,
       };
 
       const response = await submitViaForm(data);

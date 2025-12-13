@@ -86,8 +86,10 @@ function handleAttendance(data) {
 function handleWish(data) {
   const name = data.name;
   const message = data.message;
+  const isAttending = data.isAttending === 'true' || data.isAttending === true;
   
   Logger.log('Processing wish from: ' + name);
+  Logger.log('Is attending: ' + isAttending);
   
   if (!name || !message) {
     return createResponse(false, 'Missing required fields');
@@ -103,15 +105,36 @@ function handleWish(data) {
     sheet.getRange(1, 1, 1, 4).setFontWeight('bold');
   }
   
-  const timestamp = new Date(data.timestamp || new Date());
-  sheet.appendRow([
-    Utilities.formatDate(timestamp, Session.getScriptTimeZone(), 'yyyy-MM-dd HH:mm:ss'),
-    name,
-    'Không tham dự',  // Status column
-    message
-  ]);
+  // Check if user already has an attendance record
+  const dataRange = sheet.getDataRange();
+  const values = dataRange.getValues();
+  let existingRowIndex = -1;
   
-  Logger.log('Wish saved successfully');
+  for (let i = 1; i < values.length; i++) {
+    if (values[i][1] === name && values[i][2] === 'Tham dự' && !values[i][3]) {
+      existingRowIndex = i + 1; // +1 because sheet rows are 1-indexed
+      break;
+    }
+  }
+  
+  const timestamp = new Date(data.timestamp || new Date());
+  const status = isAttending ? 'Tham dự' : 'Không tham dự';
+  
+  // If attending and has existing attendance record, update it with the message
+  if (isAttending && existingRowIndex > 0) {
+    sheet.getRange(existingRowIndex, 4).setValue(message); // Update message column
+    Logger.log('Updated existing attendance record with wish');
+  } else {
+    // Otherwise, add a new row
+    sheet.appendRow([
+      Utilities.formatDate(timestamp, Session.getScriptTimeZone(), 'yyyy-MM-dd HH:mm:ss'),
+      name,
+      status,
+      message
+    ]);
+    Logger.log('Wish saved with status: ' + status);
+  }
+  
   return createResponse(true, 'Wish received');
 }
 

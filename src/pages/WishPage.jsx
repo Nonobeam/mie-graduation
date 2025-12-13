@@ -115,7 +115,7 @@ const WishPage = () => {
                         </div>
                         <div className="wish-success-message">
                             <span className="success-icon">✓</span>
-                            Lời chúc của ${userName} đã được gửi thành công!
+                            Lời chúc của {userName} đã được gửi thành công!
                         </div>
                     </div>
                 ) : (

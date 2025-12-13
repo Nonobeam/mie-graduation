@@ -62,7 +62,7 @@ const CelebrationPage = () => {
         setLoading(true);
 
         try {
-            const result = await api.submitWish(userName, wishMessage);
+            const result = await api.submitWish(userName, wishMessage, true); // isAttending = true
 
             if (result.success) {
                 storage.saveWish(wishMessage);
@@ -146,7 +146,7 @@ const CelebrationPage = () => {
                             </div>
                             <div className="wish-sent-badge">
                                 <span className="success-icon">✓</span>
-                                Lời chúc của ${userName} đã được gửi!
+                                Lời chúc của {userName} đã được gửi!
                             </div>
                         </div>
                     ) : (
