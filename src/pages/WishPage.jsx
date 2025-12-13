@@ -89,9 +89,19 @@ const WishPage = () => {
                         {hasWish ? `Lời Chúc Của ${userName}` : 'Gửi Lời Chúc'}
                     </h2>
                     <p className="wish-description">
+                        <p className="celebration-text">
+                            Nếu {userName} nhận được link này nghĩa là chúng ta đã cùng nhau trải qua một điều gì đó, dù lớn hay nhỏ thì mình cũng rất biết ơn vả trân trọng
+                        </p>
+                        <p className="celebration-text">
+                            Hy vọng sau này chúng ta có thể connect tiếp với nhau trong một khoảnh khắc nào đó nha. Cheers 🥂
+                        </p>
                         {hasWish
                             ? `Cảm ơn ${userName} đã gửi lời chúc đến Thảo Mie!`
-                            : `${userName} có thể cho My xin lời khuyên về công việc, cuộc sống hoặc là cảm nhận về tính cách của My để My hiểu hơn về bản thân mình hoặc bất cứ điều gì ${userName} muốn chia sẻ. Feel free nha, chỉ có hai ta biết thui 😉`}
+                            : `${userName} có thể cho My xin lời khuyên về công việc, cuộc sống, cảm nhận về tính cách để My hiểu hơn về bản thân mình hoặc bất cứ điều gì ${userName} muốn chia sẻ. Feel free nha, chỉ có hai ta biết thui 😉`}
+                        <p></p>
+                        <p className="celebration-text">
+                            Chúc {userName} thật hạnh phúc và luôn khỏe mạnh nhá 💕
+                        </p>
                     </p>
                 </div>
 

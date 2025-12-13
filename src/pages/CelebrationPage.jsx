@@ -115,13 +115,13 @@ const CelebrationPage = () => {
                         Cảm ơn <span className="highlight">{userName}</span> đã tham dự!
                     </h2>
                     <p className="celebration-text">
-                        Nếu {userName} nhận được link này nghĩa là chúng ta đã cùng nhau trải qua một điều gì đó, dù lớn hay nhỏ thì mình cũng biết ơn, trân trọng trải nghiệm ấy
+                        Nếu {userName} nhận được link này nghĩa là chúng ta đã cùng nhau trải qua một điều gì đó, dù lớn hay nhỏ thì mình cũng rất biết ơn vả trân trọng
                     </p>
                     <p className="celebration-text">
                         Hy vọng sau này chúng ta có thể connect tiếp với nhau trong một khoảnh khắc nào đó nha. Cheers 🥂
                     </p>
                     <p className="celebration-text">
-                        Chúc ${userName} thật hạnh phúc và luôn khỏe mạnh nhá 💕
+                        Chúc {userName} thật hạnh phúc và luôn khỏe mạnh nhá 💕
                     </p>
                 </div>
 
