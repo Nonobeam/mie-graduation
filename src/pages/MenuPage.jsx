@@ -50,6 +50,8 @@ const MenuPage = () => {
                         </h2>
                         <p className="menu-description">
                             Chúc mừng Thảo Mie đã hoàn thành chặng đường học tập!
+                        </p>
+                        <p>
                             {userName} muốn làm gì hôm nay?
                         </p>
                     </div>
