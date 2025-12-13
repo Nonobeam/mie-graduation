@@ -125,13 +125,6 @@ const CelebrationPage = () => {
                     </p>
                 </div>
 
-                <div className="celebration-quote">
-                    <p className="quote-text">
-                        "The future belongs to those who believe in the beauty of their dreams."
-                    </p>
-                    <p className="quote-author">— Eleanor Roosevelt</p>
-                </div>
-
                 {/* Wish Section */}
                 <div className="celebration-wish-section">
                     <h3 className="wish-section-title">💌 Gửi lời chúc cho Thảo Mie</h3>
@@ -176,6 +169,13 @@ const CelebrationPage = () => {
                             </Button>
                         </form>
                     )}
+                </div>
+
+                <div className="celebration-quote">
+                    <p className="quote-text">
+                        "The future belongs to those who believe in the beauty of their dreams."
+                    </p>
+                    <p className="quote-author">— Eleanor Roosevelt</p>
                 </div>
 
                 <div className="celebration-actions">
